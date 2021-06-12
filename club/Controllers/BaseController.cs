@@ -15,7 +15,6 @@ namespace club.Controllers
         #region Protected Fields
 
         protected readonly ILogger _log;
-        protected readonly IConfiguration _configuration;
 
         #endregion
 
@@ -34,11 +33,9 @@ namespace club.Controllers
         /// Contructor with params
         /// </summary>
         /// <param name="loggerFactory">The logger factory.</param>
-        /// <param name="configuration">The configuration injection.</param>
-        public BaseController(ILoggerFactory loggerFactory, IConfiguration configuration)
+        public BaseController(ILoggerFactory loggerFactory)
         {
             _log = loggerFactory.CreateLogger("BaseController");
-            _configuration = configuration;
         }
 
         #endregion

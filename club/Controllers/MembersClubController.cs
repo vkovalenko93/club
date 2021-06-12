@@ -6,6 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -24,9 +25,8 @@ namespace club.Controllers
 
         public MembersClubController(
             ILoggerFactory loggerFactory,
-            IConfiguration configuration,
             IClubManager clubManager
-            ) : base(loggerFactory, configuration)
+            ) : base(loggerFactory)
         {
             _clubManager = clubManager;
         }
@@ -50,8 +50,7 @@ namespace club.Controllers
                     return View(newUser);
                 }
 
-                var result = CheckEmailsInRepozitory(newUser.Email);
-                if (!result)
+                if (!CheckEmailsInRepozitory(newUser.Email))
                 {
                     ModelState.AddModelError("Email", "This email is already use");
                     return View(newUser);
@@ -71,8 +70,13 @@ namespace club.Controllers
         [AcceptVerbs("Get", "Post")]
         public IActionResult CheckUnickEmail(string email)
         {
-            bool result = CheckEmailsInRepozitory(email);
-            return Json(result);
+            return Json(CheckEmailsInRepozitory(email));
+        }
+
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        public IActionResult Error()
+        {
+            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
         #endregion

@@ -1,13 +1,9 @@
 ﻿@model UserViewModel
 
-@{
-
-}
-
-<div class="container-fluid">
+<div class="container-fluid club_members_block">
     <div class="row">
         <div class="col">
-            <div>
+            <div class="d-flex justify-content-center">
                 <h1>
                     Welcome to the Club !
                 </h1>
@@ -16,21 +12,33 @@
     </div>
 
     <div class="row">
-        <div class="col">
+        <div class="col-3">
             <div>
-                <form asp-action="Index" method="post" class="needs-validation" novalidate>
+                <div class="font-weight-bold mb-2">
+                    New member
+                </div>
+                <form asp-action="Index" method="post" class="needs-validation new-member" novalidate>
                     <div class="form-group">
-                        <label asp-for="Name"></label>
-                        <input class="form-control" type="text" asp-for="Name" />
+                        <div class="d-flex">
+                            <label asp-for="Name" class="mt-2"></label>
+                            <label class="mt-2 mr-2">:</label>
+                            <input class="form-control" type="text" asp-for="Name" />
+                        </div>
                         <span asp-validation-for="Name"></span>
                     </div>
                     <div class="form-group">
-                        <label asp-for="Email"></label>
-                        <input class="form-control" type="text" asp-for="Email" />
+                        <div class="d-flex">
+                            <label asp-for="Email" class="mt-2"></label>
+                            <label class="mt-2 mr-2">:</label>
+                            <input class="form-control" type="text" asp-for="Email" />
+                        </div>
                         <span asp-validation-for="Email"></span>
                     </div>
                     <div class="validation" asp-validation-summary="ModelOnly"></div>
-                    <button type="submit" class="btn btn-primary">Add</button>
+                    <div class="d-flex justify-content-between">
+                        <button type="submit" class="btn btn-primary">Add</button>
+                        <button type="button" class="btn btn-light" onclick="clear_content()">Clear</button>
+                    </div>
                 </form>
             </div>
         </div>
@@ -39,17 +47,28 @@
     <div class="row">
         <div class="col">
             <div>
-                <div>
+                <div class="d-flex justify-content-center font-weight-bold mb-2 mt-2">
+                    Members
                 </div>
-                <div class="members-data">
-                    @await Component.InvokeAsync("Members")
-                </div>
+                @await Component.InvokeAsync("Members")
             </div>
         </div>
     </div>
 </div>
 
 
+<script>
+    function clear_content() {
+        let controls = document.getElementsByClassName(`form-control`);
+        for (let index = 0; index < controls.length; index++)
+            controls[index].value = ``;
+
+        let elements = document.getElementsByClassName(`field-validation-error`);
+        for (let index = 0; index < elements.length; index++)
+            elements[index].classList.add(`field-validation-valid`);
+    }
+
+</script>
 @section scripts{
     @await Html.PartialAsync("_ValidationScriptsPartial")
 }
