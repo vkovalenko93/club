@@ -8,12 +8,24 @@ namespace club.Business.ClubManaging
 {
     public class ClubManager : IClubManager
     {
+
+        #region PrivateFields
+
         private static UserRepozitory _users;
+
+
+        #endregion
+
+        #region Contructor
 
         public ClubManager()
         {
             _users = _users ?? new UserRepozitory();
         }
+
+        #endregion
+
+        #region PublicMethodos
 
         public UserRepozitory GetUsersList()
         {
@@ -25,5 +37,7 @@ namespace club.Business.ClubManaging
             _users.Users.Add(newUser);
             return true;
         }
+
+        #endregion
     }
 }

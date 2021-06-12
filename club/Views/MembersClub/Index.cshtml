@@ -1,5 +1,4 @@
-﻿@model UserViewModel
-
+﻿
 <div class="container-fluid club_members_block">
     <div class="row">
         <div class="col">
@@ -17,29 +16,9 @@
                 <div class="font-weight-bold mb-2">
                     New member
                 </div>
-                <form asp-action="Index" method="post" class="needs-validation new-member" novalidate>
-                    <div class="form-group">
-                        <div class="d-flex">
-                            <label asp-for="Name" class="mt-2"></label>
-                            <label class="mt-2 mr-2">:</label>
-                            <input class="form-control" type="text" asp-for="Name" />
-                        </div>
-                        <span asp-validation-for="Name"></span>
-                    </div>
-                    <div class="form-group">
-                        <div class="d-flex">
-                            <label asp-for="Email" class="mt-2"></label>
-                            <label class="mt-2 mr-2">:</label>
-                            <input class="form-control" type="text" asp-for="Email" />
-                        </div>
-                        <span asp-validation-for="Email"></span>
-                    </div>
-                    <div class="validation" asp-validation-summary="ModelOnly"></div>
-                    <div class="d-flex justify-content-between">
-                        <button type="submit" class="btn btn-primary">Add</button>
-                        <button type="button" class="btn btn-light" onclick="clear_content()">Clear</button>
-                    </div>
-                </form>
+                <div id="form-content">
+                    @await Component.InvokeAsync("MemberForm")
+                </div>
             </div>
         </div>
     </div>

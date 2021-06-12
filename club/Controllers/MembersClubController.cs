@@ -1,14 +1,11 @@
 ﻿using club.Business.ClubManaging;
 using club.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Caching.Memory;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Threading.Tasks;
+using System.Text.Json;
 
 namespace club.Controllers
 {
@@ -34,9 +31,10 @@ namespace club.Controllers
         #endregion
 
         #region PublicaMethodos
+
         public IActionResult Index()
         {
-            return View(new UserViewModel());
+            return View();
         }
 
         [HttpPost]
@@ -57,6 +55,7 @@ namespace club.Controllers
                 }
 
                 _clubManager.AddNewUser(new User(newUser));
+                _log.LogInformation($"inserted new user: {JsonSerializer.Serialize(newUser)}");
 
                 return View();
             }
