@@ -1,3 +1,4 @@
+using club.Business.ClubManaging;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -25,8 +26,7 @@ namespace club
         {
             services.AddControllersWithViews();
 
-            services.AddMvc();
-            services.AddMemoryCache();
+            services.AddSingleton<IClubManager, ClubManager>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

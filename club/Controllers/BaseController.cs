@@ -15,14 +15,13 @@ namespace club.Controllers
         #region Protected Fields
 
         protected readonly ILogger _log;
-        protected readonly IMemoryCache _cache;
-        private readonly IConfiguration _configuration;
+        protected readonly IConfiguration _configuration;
 
         #endregion
 
 
         #region Construrtors
-        
+
         /// <summary>
         /// Default contructor
         /// </summary>
@@ -35,12 +34,10 @@ namespace club.Controllers
         /// Contructor with params
         /// </summary>
         /// <param name="loggerFactory">The logger factory.</param>
-        /// <param name="cache">The cache.</param>
-        /// <param name="configuration">The configuration.</param>
-        public BaseController(ILoggerFactory loggerFactory, IMemoryCache cache, IConfiguration configuration)
+        /// <param name="configuration">The configuration injection.</param>
+        public BaseController(ILoggerFactory loggerFactory, IConfiguration configuration)
         {
             _log = loggerFactory.CreateLogger("BaseController");
-            _cache = cache;
             _configuration = configuration;
         }
 

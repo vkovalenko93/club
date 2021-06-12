@@ -1,0 +1,19 @@
+﻿@model UserRepozitory
+<div>
+    Hello from view component
+</div>
+
+@foreach(var item in Model.Users)
+{
+    <div>
+        <div>
+            @item.Name
+        </div>
+        <div>
+            @item.Email
+        </div>
+        <div>
+            @item.RegistrationDate.ToString("dd.MM.yyyy")
+        </div>
+    </div>
+}
